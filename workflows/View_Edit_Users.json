@@ -1,0 +1,317 @@
+{
+  "name": "View&Edit Users",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "customers",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8ff03e1a-b583-4fe0-9f42-89a28b6c9482",
+      "name": "Webhook",
+      "webhookId": "0ce72c42-0099-4f21-9d62-e620557e5347"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "883Sgb1x8Kd5X1LX",
+          "mode": "list",
+          "cachedResultName": "Customers",
+          "cachedResultUrl": "/projects/EPOxns6mqcsgG78w/datatables/883Sgb1x8Kd5X1LX"
+        },
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "062c7ea8-5377-4bbf-87d4-2d63ed0996a0",
+      "name": "Get row(s)"
+    },
+    {
+      "parameters": {
+        "jsCode": "if (items.length === 0) {\n  return [{ json: { html: \"<h2>No customers found</h2>\" } }];\n}\n\n// Remove any manual ID column\nconst columns = Object.keys(items[0].json)\n  .filter(col => col !== \"id\");\n\nlet html = `\n<h2>Customers Database</h2>\n<table border=\"1\" cellpadding=\"8\" cellspacing=\"0\">\n<tr>\n<th>id</th>\n`;\n\nfor (const col of columns) {\n  html += `<th>${col}</th>`;\n}\n\nhtml += `<th>Save</th></tr>`;\n\nfor (const item of items) {\n  const record = item.json;\n  const rowId = record.id; // ✅ correct for Data Table\n\n  html += `<tr><form method=\"POST\" action=\"/webhook/customers\">`;\n\n  html += `\n    <td>\n      ${rowId}\n      <input type=\"hidden\" name=\"rowId\" value=\"${rowId}\" />\n    </td>\n  `;\n\n  for (const col of columns) {\n    html += `\n      <td>\n        <input type=\"text\" name=\"${col}\" value=\"${record[col] ?? \"\"}\" />\n      </td>\n    `;\n  }\n\n  html += `\n    <td>\n      <button type=\"submit\">Save</button>\n    </td>\n  </form></tr>`;\n}\n\nhtml += \"</table>\";\n\nreturn [{ json: { html } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "0729c195-ad83-4422-bf68-c24e80abba20",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "customers",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        32,
+        224
+      ],
+      "id": "404f2952-0641-4a2b-a89a-f4ed7537a48f",
+      "name": "Webhook1",
+      "webhookId": "b97bfaf9-7bbf-4798-925a-0cadf3064e54"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "883Sgb1x8Kd5X1LX",
+          "mode": "list",
+          "cachedResultName": "Customers",
+          "cachedResultUrl": "/projects/EPOxns6mqcsgG78w/datatables/883Sgb1x8Kd5X1LX"
+        },
+        "matchType": "allConditions",
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "={{$json['body'].rowId}}"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{$json['body'].Name}}",
+            "Email": "={{$json['body'].Email}}",
+            "Phone": "={{$json['body'].Phone}}",
+            "Company": "={{$json['body'].Company}}",
+            "Notes": "={{$json['body'].Notes}}",
+            "Status": "={{$json['body'].Status}}",
+            "LastContacted": "={{$json['body'].LastContacted}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "CustomerID",
+              "displayName": "CustomerID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Company",
+              "displayName": "Company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "LastContacted",
+              "displayName": "LastContacted",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        208,
+        224
+      ],
+      "id": "a537dbb3-5f98-478e-8402-0e50ebc813d9",
+      "name": "Update row(s)",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.html }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        624,
+        0
+      ],
+      "id": "ef11f7a6-79ad-4d94-a464-411d65d4f9c6",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "<h2>Updated Successfully ✅</h2>\n<a href=\"/webhook/customers\">Back to Table</a>",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        416,
+        224
+      ],
+      "id": "d22d3146-80a1-43d4-ac6c-01b753ea4852",
+      "name": "Respond to Webhook1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s)": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Update row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row(s)": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "bd5e8026-efbc-4f2e-abef-192152a4ead2",
+  "meta": {
+    "instanceId": "a5bb3cfed9d8e9cc44bc269bed7e643c71d499b6af6d4e8ef3efc477fd473086"
+  },
+  "id": "F4dq94x8l17qwyiz",
+  "tags": []
+}

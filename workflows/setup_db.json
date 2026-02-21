@@ -1,0 +1,87 @@
+{
+  "name": "Setup Database",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "426d79ed-d1a1-4c2a-9943-0684bf8e7a23",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "resource": "table",
+        "operation": "create",
+        "tableName": "Customers",
+        "columns": {
+          "column": [
+            {
+              "name": "Name"
+            },
+            {
+              "name": "Email"
+            },
+            {
+              "name": "Phone",
+              "type": "number"
+            },
+            {
+              "name": "Company"
+            },
+            {
+              "name": "Notes"
+            },
+            {
+              "name": "Status"
+            },
+            {
+              "name": "LastContacted",
+              "type": "date"
+            }
+          ]
+        },
+        "options": {
+          "createIfNotExists": false
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "b71121c6-bbef-47de-8ff1-f8ad6e483441",
+      "name": "Create a data table"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Create a data table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "f44a9853-1e1d-4074-bdb0-99ca791069af",
+  "meta": {
+    "instanceId": "a5bb3cfed9d8e9cc44bc269bed7e643c71d499b6af6d4e8ef3efc477fd473086"
+  },
+  "id": "RptlpYFhQRUYbdlI",
+  "tags": []
+}
