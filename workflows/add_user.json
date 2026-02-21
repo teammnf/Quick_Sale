@@ -13,7 +13,6 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "CustomerID": "={{ $json.CustomerID }}",
             "Phone": "={{ $('On form submission').item.json['Phone Number'] }}",
             "Name": "={{ $('On form submission').item.json.Name }}",
             "Email": "={{ $('On form submission').item.json.Email }}",
@@ -32,7 +31,7 @@
               "display": true,
               "type": "number",
               "readOnly": false,
-              "removed": false
+              "removed": true
             },
             {
               "id": "Name",
