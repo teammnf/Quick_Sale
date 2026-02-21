@@ -1,117 +1,181 @@
-PROJECT TITLE: AI Sales Follow-Up Manager (Powered by n8n)
+PROJECT TITLE:
+AI Sales Follow-Up Manager (Powered by n8n – Local First Version)
+
+====================================================================
 
 OVERVIEW:
-This project is a SaaS-based Follow-Up Automation Manager designed for sales professionals. The system automates personalized follow-ups across Email, SMS, and LinkedIn using preset templates and AI-generated content. The backend workflow automation is handled using n8n.
+This project is a locally runnable AI-powered Follow-Up Automation Manager 
+designed for sales professionals.
 
----
+Instead of building a full frontend dashboard initially, the system runs 
+entirely inside n8n, which acts as both:
+- Workflow engine
+- Temporary user interface
+
+Users simply:
+1. Install n8n locally
+2. Import the provided workflow JSON
+3. Configure credentials
+4. Start generating follow-ups
+
+No custom frontend required (Version 1).
+
+====================================================================
 
 CORE OBJECTIVE:
-Reduce time spent by sales reps on writing repetitive follow-ups by providing personalized, editable, multi-channel follow-up options.
---------------------------------------------------------------------------------------------------------------------------------------
+Reduce time spent writing repetitive follow-ups by providing:
+
+- Personalized Email drafts
+- SMS drafts
+- LinkedIn connection messages
+- Editable outputs before sending
+
+All generated using AI + structured templates.
+
+====================================================================
+
+FIRST-TIME USER EXPERIENCE:
+
+STEP 1: Install n8n Locally
+Run:
+npm install n8n -g
+n8n start
+
+STEP 2: Import Workflow JSON
+Upload:
+ai-sales-followup-manager.json
+
+STEP 3: First-Run Setup
+On first execution, user chooses:
+
+1) Connect Existing Google Sheet
+2) Create New Google Sheet
+
+====================================================================
+
+CUSTOMER DATABASE OPTIONS:
+
+Option A: Connect Existing Sheet
+User provides:
+- Google Sheets link
+- API access
+- Worksheet name
+
+Required Fields:
+Customer ID | Name | Email | Phone | LinkedIn | Company | Notes
+
+Option B: Create New Sheet Automatically
+Workflow:
+- Creates a new Google Sheet
+- Creates required columns
+- Stores Sheet ID for future use
+
+====================================================================
 
 SYSTEM FLOW:
 
-1. LANDING PAGE
+1. User opens n8n
+2. Runs workflow
+3. Chooses:
+   - Existing Customer ID
+   - Create New Customer
+4. Workflow:
+   - Fetches data from Google Sheets
+   - Applies template or AI generation
+   - Returns editable drafts
 
-   * Existing User Login
-   * New User Registration
+All drafts appear inside n8n execution output.
 
-2. USER AUTHENTICATION
+====================================================================
 
-   * Secure login with email and password
-   * New account creation
-   * User-specific dashboard access
+FOLLOW-UP OPTIONS:
 
-3. DASHBOARD (After Login)
-   Options Available:
+User selects:
+- Preset Template
+- AI Generate New Template
 
-   * Enter Existing Customer ID
-   * Create New Customer
+Outputs:
+1) Email Draft (Editable)
+2) SMS Draft (Editable)
+3) LinkedIn Message (Editable)
 
-4. CUSTOMER MANAGEMENT
+Sending Options:
+- Manual copy-paste
+- Automated via SMTP / Twilio / API (optional)
 
-   * Store customer data in Google Sheets
-   * Fields may include:
+====================================================================
 
-     * Customer ID
-     * Name
-     * Email
-     * Phone Number
-     * LinkedIn Profile
-     * Company Name
-     * Previous Interaction Notes
+TECH ARCHITECTURE (Version 1 – Local Only):
 
-5. TEMPLATE SELECTION
+Interface:
+- n8n UI
 
-   * Preset follow-up templates available
-   * Option to generate a new template using AI
-   * AI can personalize based on customer details
+Automation Engine:
+- n8n
 
-6. EMAIL FOLLOW-UP
+AI Integration:
+- OpenAI / Groq / Llama API
 
-   * Editable email draft generated
-   * User can modify before sending
+Database:
+- Google Sheets
 
-7. SMS FOLLOW-UP
+====================================================================
 
-   * Short personalized SMS draft
-   * Editable before sending
+DISTRIBUTION MODEL:
 
-8. LINKEDIN FOLLOW-UP
+Repository Structure:
 
-   * Personalized LinkedIn connection message
-   * Editable before sending
+/ai-sales-followup-manager
+│
+├── workflows/
+│   └── ai-sales-followup-manager.json
+│
+├── setup-guide.md
+└── README.md
 
----
+User Instructions:
+1. Install n8n
+2. Import workflow
+3. Add Google + AI credentials
+4. Run
 
-TECH ARCHITECTURE:
-
-Frontend:
-
-* Web dashboard (React / Next.js recommended)
-
-Backend:
-
-* n8n for workflow automation
-* AI API (OpenAI / Groq / Llama model)
-* Google Sheets API for data storage
-
-Workflow Logic (n8n):
-
-1. Receive user input
-2. Fetch customer data from Google Sheets
-3. Generate personalized content via AI
-4. Return Email, SMS, LinkedIn drafts
-
----
+====================================================================
 
 FUTURE IMPROVEMENTS:
 
-* Follow-up scheduling automation
-* CRM integration (HubSpot, Salesforce)
-* Performance analytics dashboard
-* Response tracking
-* Multi-user team accounts
+- Dedicated React dashboard
+- Team login system
+- CRM integrations (HubSpot, Salesforce)
+- Analytics dashboard
+- Follow-up scheduling
+- Multi-user accounts
+- SaaS subscription model
 
----
+====================================================================
 
 TARGET USERS:
 
-* Sales Representatives
-* Sales Agencies
-* Freelancers
-* Startup Founders
+- Sales Representatives
+- Freelancers
+- Startup Founders
+- Sales Agencies
 
----
+====================================================================
 
-MONETIZATION MODEL:
+MONETIZATION MODEL (Future SaaS):
 
-* Monthly Subscription
-* Per-user pricing
-* Per-generated follow-up credit model
-* Agency plan for teams
+- Monthly subscription
+- Per-user pricing
+- Per-generated follow-up credit system
+- Agency team plans
 
----
+====================================================================
 
 END GOAL:
-Provide a fast, contextual, and editable multi-channel follow-up system that sales professionals prefer over writing from scratch.
+
+Deliver a fast, contextual, and editable multi-channel follow-up system that:
+
+✔ Runs locally
+✔ Requires minimal setup
+✔ Uses AI intelligently
+✔ Feels faster than writing from scratch
