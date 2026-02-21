@@ -56,5 +56,5 @@ Use setup_db.json to setup the database for the first time
 
 Use add_user.json to add users to the database
 
-To use View_Edit_Users.json goto http://localhost:5678/webhook-test/customers.
-Here you can edit database information easily. Use CTRL+F to search for emails/text
+To use View_Edit_Users.json, first publish it then goto http://localhost:5678/webhook-test/customers.
+Here you can edit and view database information easily. Use CTRL+F to search for text.
