@@ -1,0 +1,376 @@
+{
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "send-email",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -368,
+        -64
+      ],
+      "id": "8eaa6747-27f7-4611-b647-42610838b5a9",
+      "name": "Webhook",
+      "webhookId": "898bdd0c-220d-44c2-9bee-4718014bdd69"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "lcVFRBSnwytcGfJP",
+          "mode": "list",
+          "cachedResultName": "customers",
+          "cachedResultUrl": "/projects/XSG1nzQ01mRnOKu2/datatables/lcVFRBSnwytcGfJP"
+        },
+        "matchType": "allConditions",
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "={{$json.customerId}}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -176,
+        -48
+      ],
+      "id": "7edf7d16-daa7-4690-af4a-56edfab3d93f",
+      "name": "Get row(s)"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{$node[\"Webhook\"].json[\"template\"]}}",
+                    "rightValue": "initiation",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "110bad32-17b4-4324-b318-142d129bc7b7"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "9b2c927c-688e-4b0a-9dc5-415674a9e39f",
+                    "leftValue": "={{$node[\"Webhook\"].json[\"template\"]}}",
+                    "rightValue": "reminder",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "05cf9ffd-248d-4958-ac99-0f06dcfe10f0",
+                    "leftValue": "={{$node[\"Webhook\"].json[\"template\"]}}",
+                    "rightValue": "dicount",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "b5df8494-d7a1-46ed-8004-a36158344080",
+                    "leftValue": "={{$node[\"Webhook\"].json[\"template\"]}}",
+                    "rightValue": "meeting",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -16,
+        -160
+      ],
+      "id": "cb2d7bff-acab-45a3-bb9c-9fdac831c1b5",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d6c824b1-154f-4f64-8165-8b928e6834df",
+              "name": "=Great connecting with {{$json[0].name}}",
+              "value": "=Hi {{$json[0].name}},  It was great connecting with you. I’d love to explore how we can work together.  Best regards, Your Name",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        288,
+        -256
+      ],
+      "id": "3fe5a9fa-1c6d-414f-9fd2-7c9df053b335",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2d0b5cca-f6fb-4c39-bcda-04b7690a2f11",
+              "name": "=Just following up {{$json[0].name}}",
+              "value": "=Hi {{$json[0].name}},  I wanted to follow up on my previous message. Let me know if you had a chance to review it.  Thanks, Your Name",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        336,
+        -112
+      ],
+      "id": "c7f11802-75b1-42b3-8085-1c42ac32d34a",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a9c8d83e-2eaf-4c73-b3c3-1430595d4716",
+              "name": "=Special offer for {{$json[0].name}}",
+              "value": "=Hi {{$json[0].name}},  We are offering a limited-time discount. Let me know if you're interested.  Best, Your Name",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        336,
+        80
+      ],
+      "id": "6d12c77e-c2fc-4ec7-884b-925a13f50437",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "dedf234d-defb-40ef-bbe9-a29da6890673",
+              "name": "=Scheduling a quick meeting {{$json[0].name}}",
+              "value": "=Hi {{$json[0].name}},  Can we schedule a quick meeting this week to discuss further?  Looking forward to your reply.  Best, Your Name",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        192,
+        192
+      ],
+      "id": "f586e4e8-68f7-4e9a-8cec-ce9a65035253",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{$json[0].email}}",
+        "subject": "={{$json.subject}}",
+        "message": "={{$json.message}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        688,
+        -48
+      ],
+      "id": "ea6decf0-a267-420b-b0d8-37502593def5",
+      "name": "Send a message",
+      "webhookId": "0e73813b-384a-44b5-b753-9af4df02edb0",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "dApBsCBOJlsuWNkT",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "bac1c30a-b4df-4b09-a8e3-fb1103315bfe",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9dc7df74572132f8064c624927c8fa05e6d1e0ffaebfe63a7a4afd8795160770"
+  },
+  "id": "gZP5GR50w3LKSQq3",
+  "tags": []
+}
