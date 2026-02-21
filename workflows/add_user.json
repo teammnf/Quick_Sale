@@ -24,16 +24,6 @@
           "matchingColumns": [],
           "schema": [
             {
-              "id": "CustomerID",
-              "displayName": "CustomerID",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
-              "readOnly": false,
-              "removed": true
-            },
-            {
               "id": "Name",
               "displayName": "Name",
               "required": false,
@@ -215,7 +205,7 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "8e19102d-2546-41c1-bb18-68d80a008cf6",
+  "versionId": "317b5d75-b65f-4163-9c26-92e1bc839f0e",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "a5bb3cfed9d8e9cc44bc269bed7e643c71d499b6af6d4e8ef3efc477fd473086"
