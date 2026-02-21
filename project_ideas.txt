@@ -1,0 +1,117 @@
+PROJECT TITLE: AI Sales Follow-Up Manager (Powered by n8n)
+
+OVERVIEW:
+This project is a SaaS-based Follow-Up Automation Manager designed for sales professionals. The system automates personalized follow-ups across Email, SMS, and LinkedIn using preset templates and AI-generated content. The backend workflow automation is handled using n8n.
+
+---
+
+CORE OBJECTIVE:
+Reduce time spent by sales reps on writing repetitive follow-ups by providing personalized, editable, multi-channel follow-up options.
+--------------------------------------------------------------------------------------------------------------------------------------
+
+SYSTEM FLOW:
+
+1. LANDING PAGE
+
+   * Existing User Login
+   * New User Registration
+
+2. USER AUTHENTICATION
+
+   * Secure login with email and password
+   * New account creation
+   * User-specific dashboard access
+
+3. DASHBOARD (After Login)
+   Options Available:
+
+   * Enter Existing Customer ID
+   * Create New Customer
+
+4. CUSTOMER MANAGEMENT
+
+   * Store customer data in Google Sheets
+   * Fields may include:
+
+     * Customer ID
+     * Name
+     * Email
+     * Phone Number
+     * LinkedIn Profile
+     * Company Name
+     * Previous Interaction Notes
+
+5. TEMPLATE SELECTION
+
+   * Preset follow-up templates available
+   * Option to generate a new template using AI
+   * AI can personalize based on customer details
+
+6. EMAIL FOLLOW-UP
+
+   * Editable email draft generated
+   * User can modify before sending
+
+7. SMS FOLLOW-UP
+
+   * Short personalized SMS draft
+   * Editable before sending
+
+8. LINKEDIN FOLLOW-UP
+
+   * Personalized LinkedIn connection message
+   * Editable before sending
+
+---
+
+TECH ARCHITECTURE:
+
+Frontend:
+
+* Web dashboard (React / Next.js recommended)
+
+Backend:
+
+* n8n for workflow automation
+* AI API (OpenAI / Groq / Llama model)
+* Google Sheets API for data storage
+
+Workflow Logic (n8n):
+
+1. Receive user input
+2. Fetch customer data from Google Sheets
+3. Generate personalized content via AI
+4. Return Email, SMS, LinkedIn drafts
+
+---
+
+FUTURE IMPROVEMENTS:
+
+* Follow-up scheduling automation
+* CRM integration (HubSpot, Salesforce)
+* Performance analytics dashboard
+* Response tracking
+* Multi-user team accounts
+
+---
+
+TARGET USERS:
+
+* Sales Representatives
+* Sales Agencies
+* Freelancers
+* Startup Founders
+
+---
+
+MONETIZATION MODEL:
+
+* Monthly Subscription
+* Per-user pricing
+* Per-generated follow-up credit model
+* Agency plan for teams
+
+---
+
+END GOAL:
+Provide a fast, contextual, and editable multi-channel follow-up system that sales professionals prefer over writing from scratch.
